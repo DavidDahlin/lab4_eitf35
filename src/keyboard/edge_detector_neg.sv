@@ -1,0 +1,28 @@
+// TITLE: edge_detector.sv
+// PROJECT: Keyboard VLSI lab
+// DESCRIPTION: Make sure not to use posedge/negedge on any other signal than clk
+
+`timescale 1ns/1ps
+
+module edge_detector (
+    input logic clk,
+    input logic rst,
+    input logic kb_clk_sync,
+    output logic edge_found
+    );
+
+    logic edge_previous, edge_found_internal;
+
+    always_ff @(posedge clk or posedge rst) begin
+        if(rst == 1) begin
+            edge_previous <= 0;
+            edge_found <= 0;
+        end else begin
+            edge_previous <= kb_clk_sync;
+            edge_found <= edge_found_internal;
+        end
+    end
+    
+    assign edge_found_internal = ~kb_clk_sync & edge_previous;
+        
+endmodule
