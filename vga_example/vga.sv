@@ -9,8 +9,8 @@ module vga(
     output logic [11:0] io_rgb_color
 );
 
-    localparam COLOR_BLUE = 12'hf00;
-    localparam COLOR_GREEN = 12'h0f0;
+    localparam COLOR_BLUE = 12'h0f0;
+    localparam COLOR_GREEN = 12'hf00;
     localparam COLOR_RED = 12'h00f;
     localparam COLOR_WHITE = 12'hfff;
     
@@ -43,7 +43,7 @@ module vga(
     logic is_displaying_pixels;
     
     
-    always_ff @ (posedge clock)
+    always_ff @ (posedge clock or negedge reset_n)
     begin
         if (reset_n == 0) begin
             horizontal_counter_reg <= 0;
