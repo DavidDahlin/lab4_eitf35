@@ -22,6 +22,16 @@ module convert_to_binary (
             8'h3E:  binary_out = 4'd8;
             8'h46:  binary_out = 4'd9;
             8'h45:  binary_out = 4'd0;
+
+
+            8'h4A:  binary_out = 4'd10; //"-"
+            8'h4E:  binary_out = 4'd11; //"+"
+            8'h5D:  binary_out = 4'd12; //"*"
+            8'h2E:  binary_out = 4'd14; //"%"
+
+            8'h5A:  binary_out = 4'd14; //"Enter"
+
+
             8'h00:  binary_out = 4'hF; // EMPTY
             8'hFF:  binary_out = 4'hE; // ERROR
             default:  binary_out = 4'hE; //ERROR
