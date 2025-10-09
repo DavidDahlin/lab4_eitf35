@@ -7,7 +7,7 @@
 module edge_detector (
     input logic clk,
     input logic rst,
-    input logic kb_clk_sync,
+    input logic signal,
     output logic edge_found
     );
 
@@ -18,11 +18,11 @@ module edge_detector (
             edge_previous <= 0;
             edge_found <= 0;
         end else begin
-            edge_previous <= kb_clk_sync;
+            edge_previous <= signal;
             edge_found <= edge_found_internal;
         end
     end
     
-    assign edge_found_internal = ~kb_clk_sync & edge_previous;
+    assign edge_found_internal = ~signal & edge_previous;
         
 endmodule
