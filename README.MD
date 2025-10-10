@@ -7,4 +7,8 @@
 4. Koppla ihop med VGA
 5. Implementera minne
 
-![Design](design.jpg)
+![Design](_res/design.jpg)
+
+# Display
+![Display](_res/display.jpg)
+![Display](_res/unit.jpg)
