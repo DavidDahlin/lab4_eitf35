@@ -17,11 +17,19 @@ module vga_driver_top(
 
     // Outputs
     output logic[11:0] io_rgb_color,
+    output logic io_horizontal_sync,
+    output logic io_vertical_sync
+
 ); 
 
 
-    
-
+    vga vga_controller(
+        .clock(clk),
+        .reset_n(reset_n),
+        .io_horizontal_sync(io_horizontal_sync),
+        .io_vertical_sync(io_vertical_sync),
+        .io_rgb_color(io_rgb_color),
+    )
 
     
 endmodule
