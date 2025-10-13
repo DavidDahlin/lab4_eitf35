@@ -1,12 +1,16 @@
 `timescale 1ns / 1ps
 
 
-module vga(
-    input logic clock,
+module vga_controller(
+    input logic clk,
     input logic reset_n,
     output logic io_horizontal_sync,
     output logic io_vertical_sync,
-    output logic [11:0] io_rgb_color
+
+    // add output x,y
+    output logic is_drawing,
+    output logic [10:0] x,
+    output logic [10:0] y
 );
 
     localparam COLOR_BLUE = 12'h0f0;
@@ -43,7 +47,7 @@ module vga(
     logic is_displaying_pixels;
     
     
-    always_ff @ (posedge clock or negedge reset_n)
+    always_ff @ (posedge clk or negedge reset_n)
     begin
         if (reset_n == 0) begin
             horizontal_counter_reg <= 0;
@@ -124,32 +128,11 @@ module vga(
             is_displaying_pixels = 1;
         end                          
     end
-    
-    
-    // Draw pixels on the screen
-    always_comb
-    begin
-        io_rgb_color = 0;
-        if (is_displaying_pixels) begin
-            // Paint the middle pixel in the 3rd row white
-            if (vertical_counter_reg == 3-1 && horizontal_counter_reg == NUM_HORIZONTAL_VISIBLE_PIXELS/2) begin
-                io_rgb_color = COLOR_WHITE;
-            end                   
-            
-            // Draw red, green, and blue squares in the middle of the screen
-            if (vertical_counter_reg >= NUM_VERTICAL_VISIBLE_LINES/3 && vertical_counter_reg < 2*NUM_VERTICAL_VISIBLE_LINES/3) begin
-                if (horizontal_counter_reg < NUM_HORIZONTAL_VISIBLE_PIXELS/3) begin
-                    io_rgb_color = COLOR_RED;
-                end
-                else if (horizontal_counter_reg < 2*NUM_HORIZONTAL_VISIBLE_PIXELS/3) begin
-                    io_rgb_color = COLOR_BLUE;
-                end
-                else begin
-                    io_rgb_color = COLOR_GREEN;
-                end
-            end
-        end                              
-    end
+
+    assign x = horizontal_counter_reg;
+    assign y = vertical_counter_reg;
+
+    assign is_drawing = is_displaying_pixels;
         
     assign io_horizontal_sync = h_sync_reg;
     assign io_vertical_sync = v_sync_reg;     

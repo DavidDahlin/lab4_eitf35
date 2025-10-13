@@ -1,12 +1,12 @@
 `timescale 1ns / 1ps
 
 module seven_seg_drawer #(
-    parameter int X_OFFSET = 4;
+    parameter int X_OFFSET = 4
 ) (
     // control signals
     input logic is_displaying_pixels,
     input logic[10:0] x,
-    input locic[10:0] y,
+    input logic[10:0] y,
 
     // data lines
     input logic[7:0] sev_seg,
