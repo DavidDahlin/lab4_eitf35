@@ -14,7 +14,7 @@ module op_drawer #(
 );
 
     localparam Y_OFFSET = 160;
-    localparam COLOR_BLUE = 12'h0f0;
+    localparam COLOR_WHITE = 12'hfff;
     localparam NUM_HORIZONTAL_VISIBLE_PIXELS = 640;
     localparam NUM_VERTICAL_VISIBLE_LINES = 480;
 
@@ -25,22 +25,22 @@ module op_drawer #(
         if (is_displaying_pixels) begin
             if(op == 8'h0A || op == 8'h0b || op == 8'h0d) begin
                 if((x > (18 + X_OFFSET) && x <= (38 + X_OFFSET)) && (y > (77 + Y_OFFSET) && y <= (82 + Y_OFFSET))) begin
-                    io_rgb_color = COLOR_BLUE;
+                    io_rgb_color = COLOR_WHITE;
                 end
             end
             if(op == 8'h0b) begin
                 if((x > (26 + X_OFFSET) && x <= (30 + X_OFFSET)) && (y > (70 + Y_OFFSET) && y <= (90 + Y_OFFSET))) begin
-                    io_rgb_color = COLOR_BLUE;
+                    io_rgb_color = COLOR_WHITE;
                 end
             end
             if(op == 8'h0c) begin
                 if((x > (26 + X_OFFSET) && x <= (30 + X_OFFSET)) && (y > (78 + Y_OFFSET) && y <= (82 + Y_OFFSET))) begin
-                    io_rgb_color = COLOR_BLUE;
+                    io_rgb_color = COLOR_WHITE;
                 end
             end
             if(op == 8'h0d) begin
                 if((x > (33 + X_OFFSET) && x <= (38 + X_OFFSET)) && (y > (85 + Y_OFFSET) && y <= (90 + Y_OFFSET)) || (x > (18 + X_OFFSET) && x <= (23 + X_OFFSET)) && (y > (70 + Y_OFFSET) && y <= (75 + Y_OFFSET))) begin
-                    io_rgb_color = COLOR_BLUE;
+                    io_rgb_color = COLOR_WHITE;
                 end
             end
         end

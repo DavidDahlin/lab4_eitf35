@@ -12,7 +12,7 @@ module eq_drawer #(
 );
 
     localparam Y_OFFSET = 160;
-    localparam COLOR_BLUE = 12'h0f0;
+    localparam COLOR_WHITE = 12'hfff;
     localparam NUM_HORIZONTAL_VISIBLE_PIXELS = 640;
     localparam NUM_VERTICAL_VISIBLE_LINES = 480;
 
@@ -22,7 +22,7 @@ module eq_drawer #(
 
         if (is_displaying_pixels) begin
             if((x > (18 + X_OFFSET) && x <= (38 + X_OFFSET)) && ((y > (72 + Y_OFFSET) && y <= (77 + Y_OFFSET)) || (y > (83 + Y_OFFSET) && y <= (88 + Y_OFFSET)))) begin
-                io_rgb_color = COLOR_BLUE;
+                io_rgb_color = COLOR_WHITE;
             end
         end
     end
