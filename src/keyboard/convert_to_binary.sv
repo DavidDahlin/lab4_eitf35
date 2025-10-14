@@ -24,10 +24,10 @@ module convert_to_binary (
             8'h45:  binary_out = 4'd0;
 
 
-            8'h4A:  binary_out = 4'ha; //"-" --> 1
-            8'h4E:  binary_out = 4'hb; //"+" --> 2
-            8'h5D:  binary_out = 4'hc; //"*" --> 3
-            8'h2E:  binary_out = 4'hd; //"%" --> 4
+            8'h4A:  binary_out = 4'ha; //"-" 
+            8'h4E:  binary_out = 4'hb; //"+" 
+            8'h5D:  binary_out = 4'hc; //"*" 
+            8'h2E:  binary_out = 4'hd; //"%" 
 
             8'h5A:  binary_out = 4'he; //"Enter"
 
