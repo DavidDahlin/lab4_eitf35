@@ -1,12 +1,13 @@
 // TITLE: convert_to_binary.sv
 // PROJECT: Keyboard VLSI lab
-// DESCRIPTION: Look-up-table
+// DESCRIPTION: Look-up-table SEPARATE SIGNAL FOR ENTER!
 
 `timescale 1ns/1ps
 
 module convert_to_binary (
     input logic [7:0] scan_code_in,
-    output logic [3:0] binary_out
+    output logic [3:0] binary_out,
+    output logic enter_signal
     );
     // Simple combinational logic using case statements (LUT)
 
@@ -29,13 +30,16 @@ module convert_to_binary (
             8'h5D:  binary_out = 4'hc; //"*" 
             8'h2E:  binary_out = 4'hd; //"%" 
 
-            8'h5A:  binary_out = 4'he; //"Enter"
+            8'h66:  binary_out = 4'he; //"backspace"
 
 
             8'h00:  binary_out = 4'hF; // EMPTY
             // 8'hFF:  binary_out = 4'hE; // ERROR -- Don't remember why this one existed
-            default:  binary_out = 4'hE; //ERROR
+            default:  binary_out = 4'hF; //ERROR --> Empty
         endcase
     end
+
+    assign enter_signal = (scan_code_in = 8'h5A) ? 1 : 0;
+
 
 endmodule

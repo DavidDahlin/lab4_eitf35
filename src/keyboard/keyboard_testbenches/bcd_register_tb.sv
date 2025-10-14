@@ -6,6 +6,7 @@ logic clk = 0;
 logic rst, op_ctrl, valid_scan_code;
 logic [3:0] bin_val;
 logic [9:0] bcd_val;
+logic bs = 0;
 
 always #5 clk = ~clk;
 
@@ -92,6 +93,14 @@ initial begin
     #10
     valid_scan_code = 0;
     #20
+    bs = 1;
+    #5
+    valid_scan_code = 1;
+    #10
+    valid_scan_code = 0;
+    #20
+    bs = 0;
+    #10 
     op_ctrl = 1;
     #20
     op_ctrl = 0; 
@@ -132,9 +141,11 @@ bcd_register dut(
     .clk(clk),
     .rst(rst),
     .op_ctrl(op_ctrl),
+    .backspace(bs),
     .binary_val(bin_val),
     .valid_scan_code(valid_scan_code),
     .bcd_value(bcd_val)
+
 );
 
 endmodule

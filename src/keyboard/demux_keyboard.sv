@@ -8,16 +8,16 @@ module demux_keyboard(
     input logic [3:0] binary_val,
     output logic[3:0] number, 
     output logic[3:0] operand,
-    output logic enter_signal 
+    output logic backspace_signal 
 );
 
 always_comb begin
     number = 4'hff;
     operand = 4'h0;
-    enter_signal = 1'b0;
+    backspace_signal = 1'b0;
     if(binary_val < 4'd10) number = binary_val;
     else if (binary_val < 4'he) operand = binary_val;
-    else if (binary_val == 4'he) enter_signal = 1'b1;
+    else if (binary_val == 4'he) backspace_signal = 1'b1;
 end
     
 endmodule

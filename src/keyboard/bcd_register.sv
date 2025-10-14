@@ -8,6 +8,7 @@ module bcd_register (
     input logic clk,
     input logic rst,
     input logic op_ctrl,
+    input logic backspace, 
     input logic [3:0] binary_val,
     input logic valid_scan_code,
     output logic [9:0] bcd_value
@@ -29,7 +30,9 @@ end
 always_comb begin
     shift_reg_next = shift_reg;
     if (op_ctrl) shift_reg_next = '0;
-    else if (valid_scan_code) shift_reg_next = {shift_reg[11:0], binary_val};
+    else if (valid_scan_code) begin
+        shift_reg_next = (backspace) ? shift_reg >> 4 : {shift_reg[11:0], binary_val};
+    end
 end
 
 
