@@ -11,19 +11,19 @@ module binary_to_sg (
 
     always_comb begin
         case (binary_in)
-            4'd0:  sev_seg = 8'b11000000; // 0
-            4'd1:  sev_seg = 8'b11111001; // 1
-            4'd2:  sev_seg = 8'b10100100; // 2
-            4'd3:  sev_seg = 8'b10110000; // 3
-            4'd4:  sev_seg = 8'b10011001; // 4
-            4'd5:  sev_seg = 8'b10010010; // 5
-            4'd6:  sev_seg = 8'b10000010; // 6
-            4'd7:  sev_seg = 8'b11111000; // 7
-            4'd8:  sev_seg = 8'b10000000; // 8
-            4'd9:  sev_seg = 8'b10010000; // 9
-            4'hA:  sev_seg = 8'b10111111; // - sign
-            4'hE:  sev_seg = 8'b10001110; // Overflow (F)
-            default:  sev_seg = 8'b11111111; // Blank
+            4'd0:  sev_seg = 8'b11000000; // 0 - C0
+            4'd1:  sev_seg = 8'b11111001; // 1 - F9
+            4'd2:  sev_seg = 8'b10100100; // 2 - A4
+            4'd3:  sev_seg = 8'b10110000; // 3 - B0
+            4'd4:  sev_seg = 8'b10011001; // 4 - 99
+            4'd5:  sev_seg = 8'b10010010; // 5 - 92
+            4'd6:  sev_seg = 8'b10000010; // 6 - 82
+            4'd7:  sev_seg = 8'b11111000; // 7 - F8
+            4'd8:  sev_seg = 8'b10000000; // 8 - 80
+            4'd9:  sev_seg = 8'b10010000; // 9 - 90
+            4'hA:  sev_seg = 8'b10111111; // - - BF
+            4'hE:  sev_seg = 8'b10001110; // Overflow (F) - 8E
+            default:  sev_seg = 8'b11111111; // Blank - FF
         endcase
     end
 
