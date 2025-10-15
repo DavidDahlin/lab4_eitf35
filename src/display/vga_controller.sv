@@ -3,7 +3,7 @@
 
 module vga_controller(
     input logic clk,
-    input logic reset_n,
+    input logic rst,
     output logic io_horizontal_sync,
     output logic io_vertical_sync,
 
@@ -47,9 +47,9 @@ module vga_controller(
     logic is_displaying_pixels;
     
     
-    always_ff @ (posedge clk or negedge reset_n)
+    always_ff @ (posedge clk or negedge rst)
     begin
-        if (reset_n == 0) begin
+        if (rst == 0) begin
             horizontal_counter_reg <= 0;
             vertical_counter_reg <= 0;
             h_sync_reg <= 1;

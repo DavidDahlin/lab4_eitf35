@@ -4,7 +4,7 @@
 module display_top(
     // top level signals
     input logic clk,
-    input logic reset_n,
+    input logic rst,
 
     // Display inputs
     input logic[7:0] a,
@@ -31,7 +31,7 @@ module display_top(
     // ************** TIMING CONTROL ***************
     vga_controller vga_controller(
         .clk(clk),
-        .reset_n(reset_n),
+        .rst(rst),
         .io_horizontal_sync(io_horizontal_sync),
         .io_vertical_sync(io_vertical_sync),
         .is_drawing(is_displaying_pixels),
@@ -186,7 +186,7 @@ module display_top(
 
     logic [7:0] res_sign;
 
-    assign res_sign = sign == 0 ? 8'h0d : 8'h0a;
+    assign res_sign = sign == 0 ? 8'h0b : 8'h0a;
 
     op_drawer #(
         .X_OFFSET(430)
