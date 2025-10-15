@@ -18,27 +18,32 @@ module op_drawer #(
     localparam NUM_HORIZONTAL_VISIBLE_PIXELS = 640;
     localparam NUM_VERTICAL_VISIBLE_LINES = 480;
 
+    // "-" --> 1 -> 130
+    // "+" --> 2 -> 131
+    // "*" --> 3 -> 132
+    // "%" --> 4 -> 133
+
     always_comb begin : NUMBER_DRIVER
 
         io_rgb_color = 12'h000;
 
         if (is_displaying_pixels) begin
-            if(op == 8'h0A || op == 8'h0b || op == 8'h0d) begin
+            if(op == 8'd130 || op == 8'd131 || op == 8'd133) begin
                 if((x > (18 + X_OFFSET) && x <= (38 + X_OFFSET)) && (y > (77 + Y_OFFSET) && y <= (82 + Y_OFFSET))) begin
                     io_rgb_color = COLOR_WHITE;
                 end
             end
-            if(op == 8'h0b) begin
+            if(op == 8'd131) begin
                 if((x > (26 + X_OFFSET) && x <= (30 + X_OFFSET)) && (y > (70 + Y_OFFSET) && y <= (90 + Y_OFFSET))) begin
                     io_rgb_color = COLOR_WHITE;
                 end
             end
-            if(op == 8'h0c) begin
+            if(op == 8'd132) begin
                 if((x > (26 + X_OFFSET) && x <= (30 + X_OFFSET)) && (y > (78 + Y_OFFSET) && y <= (82 + Y_OFFSET))) begin
                     io_rgb_color = COLOR_WHITE;
                 end
             end
-            if(op == 8'h0d) begin
+            if(op == 8'd133) begin
                 if((x > (33 + X_OFFSET) && x <= (38 + X_OFFSET)) && (y > (85 + Y_OFFSET) && y <= (90 + Y_OFFSET)) || (x > (18 + X_OFFSET) && x <= (23 + X_OFFSET)) && (y > (70 + Y_OFFSET) && y <= (75 + Y_OFFSET))) begin
                     io_rgb_color = COLOR_WHITE;
                 end
@@ -49,9 +54,3 @@ module op_drawer #(
 
     
 endmodule
-
-
-// 8'h4A:  binary_out = 4'h0a; //"-" --> 1
-// 8'h4E:  binary_out = 4'h0b; //"+" --> 2
-// 8'h5D:  binary_out = 4'h0c; //"*" --> 3
-// 8'h2E:  binary_out = 4'h0d; //"%" --> 4
