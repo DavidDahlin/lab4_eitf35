@@ -55,7 +55,7 @@ always_comb begin
     out_reg_next = out_reg;
     case (counter)
         2'd1: begin
-            out_reg_next = {4'd0, operand};
+            out_reg_next = {4'd0, operand} + 8'd120;
         end
         default: begin
             out_reg_next = number;
