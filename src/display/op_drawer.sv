@@ -9,12 +9,14 @@ module op_drawer #(
     input logic[10:0] y,
 
     // data lines
+    input logic overflow,
     input logic[7:0] op,
     output logic[11:0] io_rgb_color
 );
 
     localparam Y_OFFSET = 160;
     localparam COLOR_WHITE = 12'hfff;
+    localparam COLOR_RED = 12'h00f;
     localparam NUM_HORIZONTAL_VISIBLE_PIXELS = 640;
     localparam NUM_VERTICAL_VISIBLE_LINES = 480;
 
@@ -48,9 +50,12 @@ module op_drawer #(
                     io_rgb_color = COLOR_WHITE;
                 end
             end
+            if(overflow == 1) begin
+                if((x > (26 + X_OFFSET) && x <= (30 + X_OFFSET)) && (y > (60 + Y_OFFSET) && y <= (65 + Y_OFFSET))) begin
+                    io_rgb_color = COLOR_RED;
+                end
+            end
         end
     end
 
-
-    
 endmodule

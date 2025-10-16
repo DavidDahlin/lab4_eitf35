@@ -12,6 +12,7 @@ module display_top(
 
     input logic[7:0] result,
     input logic sign,
+    input logic overflow,
     
     input logic[7:0] operand,
 
@@ -142,6 +143,7 @@ module display_top(
         .y(y),
         .is_displaying_pixels(is_displaying_pixels),
         .op(operand),
+        .overflow(1'b0),
         .io_rgb_color(io_rgb_color_3)
     );
 
@@ -185,7 +187,7 @@ module display_top(
     );
 
     logic [7:0] res_sign;
-
+    
     // convert sign to +/-
     assign res_sign = sign == 0 ? 8'd131 : 8'h130;
 
@@ -196,6 +198,7 @@ module display_top(
         .y(y),
         .is_displaying_pixels(is_displaying_pixels),
         .op(res_sign),
+        .overflow(overflow),
         .io_rgb_color(io_rgb_color_8)
     );
 
