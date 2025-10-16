@@ -13,6 +13,7 @@ module mem_testbench();
     logic [7:0] douta;
 
 
+
     initial begin
 
         dina = 8'd100;
@@ -29,7 +30,7 @@ module mem_testbench();
         #10
         wea = 0;
         addra = addra + 1;
-        #10
+        #20
 
         dina = 8'd200;
         #10
@@ -37,14 +38,14 @@ module mem_testbench();
         #10
         wea = 0;
         addra = addra + 1;
-        #10  
+        #20  
 
         addra = addra - 1;
-        #10  
+        #30  
         addra = addra - 1;
-        #10  
+        #30  
         addra = addra - 1;
-        #10;
+        #30;
 
 
     end
