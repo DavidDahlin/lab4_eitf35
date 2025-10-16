@@ -39,7 +39,7 @@ module convert_to_binary (
         endcase
     end
 
-    assign enter_signal = (scan_code_in = 8'h5A) ? 1 : 0;
+    assign enter_signal = (scan_code_in == 8'h5A) ? 1 : 0;
 
 
 endmodule

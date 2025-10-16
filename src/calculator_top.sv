@@ -17,8 +17,8 @@ module calulator_top(
     output logic [3:0] seg_en,
 
     // VGA
-    output logic[11:0] io_rgb_color
-    output logic io_horizontal_sync
+    output logic[11:0] io_rgb_color,
+    output logic io_horizontal_sync,
     output logic io_vertical_sync
     );
 
@@ -89,7 +89,8 @@ module calulator_top(
         .douta(douta),
         .wea(wea),
         .addra(addra),
-        .dina(dina), 
+        .dina(dina),
+        .ena(ena), 
         .a(a), 
         .b(b), 
         .op(op)
@@ -118,7 +119,7 @@ module calulator_top(
         .clk(clk),
         .rst(rst),
         .signal(latch_debounced),
-        .output(latch_edge)
+        .edge_found(latch_edge)
     );
 
 

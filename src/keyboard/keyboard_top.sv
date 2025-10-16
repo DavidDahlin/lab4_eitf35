@@ -46,7 +46,7 @@ module keyboard_top (
     edge_detector edge_detector_inst (
         .clk(clk),
         .rst(rst),
-        .kb_clk_sync(kb_clk_sync),
+        .signal(kb_clk_sync),
         .edge_found(edge_found)
         );
 
