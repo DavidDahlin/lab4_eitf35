@@ -10,14 +10,14 @@ module keyboard_top (
     input logic kb_data,
     input logic kb_clk,
 
-    input logic op_ctrl;
+    input logic op_ctrl,
 
     output logic [7:0] sc,
     output logic [7:0] num,
-    output logic [3:0] seg_en
+    output logic [3:0] seg_en,
 
-    output logic enter_edge;
-    output logic valid;
+    output logic enter_edge,
+    output logic valid,
     output logic [7:0] num_or_operand
     );
 
@@ -81,7 +81,7 @@ module keyboard_top (
         
     convert_to_binary convert_to_binary_inst (
         .scan_code_in(code_to_display),
-        .binary_out(binary_num)
+        .binary_out(binary_num),
         .enter_signal(enter)
         );
 
