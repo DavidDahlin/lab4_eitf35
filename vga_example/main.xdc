@@ -5,38 +5,38 @@
 
 ## Clock signal
 ##Bank = 35, Pin name = IO_L12P_T1_MRCC_35,					Sch name = CLK100MHZ
-set_property PACKAGE_PIN E3 [get_ports clock]							
-	set_property IOSTANDARD LVCMOS33 [get_ports clock]
-	create_clock -add -name sys_clk_pin -period 10.00 -waveform {0 5} [get_ports clock]
+set_property PACKAGE_PIN E3 [get_ports clk]							
+	set_property IOSTANDARD LVCMOS33 [get_ports clk]
+	create_clock -add -name sys_clk_pin -period 10.00 -waveform {0 5} [get_ports clk]
  
 ## Switches
-##Bank = 34, Pin name = IO_L21P_T3_DQS_34,					Sch name = SW0
-#set_property PACKAGE_PIN U9 [get_ports {sw[0]}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {sw[0]}]
-##Bank = 34, Pin name = IO_25_34,							Sch name = SW1
-#set_property PACKAGE_PIN U8 [get_ports {sw[1]}]					
-	#set_property IOSTANDARD LVCMOS33 [get_ports {sw[1]}]
-##Bank = 34, Pin name = IO_L23P_T3_34,						Sch name = SW2
-#set_property PACKAGE_PIN R7 [get_ports {sw[2]}]					
-	#set_property IOSTANDARD LVCMOS33 [get_ports {sw[2]}]
-##Bank = 34, Pin name = IO_L19P_T3_34,						Sch name = SW3
-#set_property PACKAGE_PIN R6 [get_ports {sw[3]}]					
-	#set_property IOSTANDARD LVCMOS33 [get_ports {sw[3]}]
-##Bank = 34, Pin name = IO_L19N_T3_VREF_34,					Sch name = SW4
-#set_property PACKAGE_PIN R5 [get_ports {sw[4]}]					
-	#set_property IOSTANDARD LVCMOS33 [get_ports {sw[4]}]
-##Bank = 34, Pin name = IO_L20P_T3_34,						Sch name = SW5
-#set_property PACKAGE_PIN V7 [get_ports {sw[5]}]					
-	#set_property IOSTANDARD LVCMOS33 [get_ports {sw[5]}]
-##Bank = 34, Pin name = IO_L20N_T3_34,						Sch name = SW6
-#set_property PACKAGE_PIN V6 [get_ports {sw[6]}]					
-	#set_property IOSTANDARD LVCMOS33 [get_ports {sw[6]}]
-##Bank = 34, Pin name = IO_L10P_T1_34,						Sch name = SW7
-#set_property PACKAGE_PIN V5 [get_ports {sw[7]}]					
-	#set_property IOSTANDARD LVCMOS33 [get_ports {sw[7]}]
-##Bank = 34, Pin name = IO_L8P_T1-34,						Sch name = SW8
-#set_property PACKAGE_PIN U4 [get_ports {sw[8]}]					
-	#set_property IOSTANDARD LVCMOS33 [get_ports {sw[8]}]
+# #Bank = 34, Pin name = IO_L21P_T3_DQS_34,					Sch name = SW0
+# set_property PACKAGE_PIN U9 [get_ports {number[0]}]					
+# 	set_property IOSTANDARD LVCMOS33 [get_ports {number[0]}]
+# #Bank = 34, Pin name = IO_25_34,							Sch name = SW1
+# set_property PACKAGE_PIN U8 [get_ports {number[1]}]					
+# 	set_property IOSTANDARD LVCMOS33 [get_ports {number[1]}]
+# #Bank = 34, Pin name = IO_L23P_T3_34,						Sch name = SW2
+# set_property PACKAGE_PIN R7 [get_ports {number[2]}]					
+# 	set_property IOSTANDARD LVCMOS33 [get_ports {number[2]}]
+# #Bank = 34, Pin name = IO_L19P_T3_34,						Sch name = SW3
+# set_property PACKAGE_PIN R6 [get_ports {number[3]}]					
+# 	set_property IOSTANDARD LVCMOS33 [get_ports {number[3]}]
+# #Bank = 34, Pin name = IO_L19N_T3_VREF_34,					Sch name = SW4
+# set_property PACKAGE_PIN R5 [get_ports {number[4]}]					
+# 	set_property IOSTANDARD LVCMOS33 [get_ports {number[4]}]
+# #Bank = 34, Pin name = IO_L20P_T3_34,						Sch name = SW5
+# set_property PACKAGE_PIN V7 [get_ports {number[5]}]					
+# 	set_property IOSTANDARD LVCMOS33 [get_ports {number[5]}]
+# #Bank = 34, Pin name = IO_L20N_T3_34,						Sch name = SW6
+# set_property PACKAGE_PIN V6 [get_ports {number[6]}]					
+# 	set_property IOSTANDARD LVCMOS33 [get_ports {number[6]}]
+# #Bank = 34, Pin name = IO_L10P_T1_34,						Sch name = SW7
+# set_property PACKAGE_PIN V5 [get_ports {number[7]}]					
+# 	set_property IOSTANDARD LVCMOS33 [get_ports {number[7]}]
+# #Bank = 34, Pin name = IO_L8P_T1-34,						Sch name = SW8
+# set_property PACKAGE_PIN U4 [get_ports {number[8]}]					
+# 	set_property IOSTANDARD LVCMOS33 [get_ports {number[8]}]
 ##Bank = 34, Pin name = IO_L9N_T1_DQS_34,					Sch name = SW9
 #set_property PACKAGE_PIN V2 [get_ports {sw[9]}]					
 	#set_property IOSTANDARD LVCMOS33 [get_ports {sw[9]}]
@@ -188,8 +188,8 @@ set_property PACKAGE_PIN E3 [get_ports clock]
 
 ##Buttons
 #Bank = 15, Pin name = IO_L3P_T0_DQS_AD1P_15,				Sch name = CPU_RESET
-set_property PACKAGE_PIN C12 [get_ports reset_n]				
-	set_property IOSTANDARD LVCMOS33 [get_ports reset_n]
+set_property PACKAGE_PIN C12 [get_ports rst]				
+	set_property IOSTANDARD LVCMOS33 [get_ports rst]
 ##Bank = 15, Pin name = IO_L11N_T1_SRCC_15,					Sch name = BTNC
 #set_property PACKAGE_PIN E16 [get_ports btnC]						
 	#set_property IOSTANDARD LVCMOS33 [get_ports btnC]
@@ -503,13 +503,13 @@ set_property PACKAGE_PIN B12 [get_ports io_vertical_sync]
 
 ##USB HID (PS/2)
 ##Bank = 35, Pin name = IO_L13P_T2_MRCC_35,					Sch name = PS2_CLK
-#set_property PACKAGE_PIN F4 [get_ports PS2Clk]						
-	#set_property IOSTANDARD LVCMOS33 [get_ports PS2Clk]
-	#set_property PULLUP true [get_ports PS2Clk]
+set_property PACKAGE_PIN F4 [get_ports kb_clk]						
+	set_property IOSTANDARD LVCMOS33 [get_ports kb_clk]
+	set_property PULLUP true [get_ports kb_clk]
 ##Bank = 35, Pin name = IO_L10N_T1_AD15N_35,					Sch name = PS2_DATA
-#set_property PACKAGE_PIN B2 [get_ports PS2Data]					
-	#set_property IOSTANDARD LVCMOS33 [get_ports PS2Data]	
-	#set_property PULLUP true [get_ports PS2Data]
+set_property PACKAGE_PIN B2 [get_ports kb_data]					
+	set_property IOSTANDARD LVCMOS33 [get_ports kb_data]	
+	set_property PULLUP true [get_ports kb_data]
 
 
 

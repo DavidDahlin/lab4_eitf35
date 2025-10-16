@@ -16,9 +16,6 @@ module display_top(
     
     input logic[7:0] operand,
 
-    // Control signals
-    input logic valid,
-
     // Outputs
     output logic[11:0] io_rgb_color,
     output logic io_horizontal_sync,
