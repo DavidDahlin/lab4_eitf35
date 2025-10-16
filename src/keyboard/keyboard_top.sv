@@ -9,9 +9,16 @@ module keyboard_top (
     input logic rst,
     input logic kb_data,
     input logic kb_clk,
+
+    input logic op_ctrl;
+
     output logic [7:0] sc,
     output logic [7:0] num,
     output logic [3:0] seg_en
+
+    output logic enter_edge;
+    output logic valid;
+    output logic [7:0] num_or_operand
     );
 
     // Interconnect signals
@@ -69,16 +76,65 @@ module keyboard_top (
 
         // debug
         assign sc = l_sc;
+
+    logic enter;
         
     convert_to_binary convert_to_binary_inst (
         .scan_code_in(code_to_display),
         .binary_out(binary_num)
+        .enter_signal(enter)
         );
+
 
     binary_to_sg binary_to_sg_inst (
         .binary_in(binary_num),
         .sev_seg(num)
         );
 
+    logic l_enter_edge;
+
+    edge_detector enter_edge_detector(
+        .clk(clk),
+        .rst(rst),
+        .signal(enter),
+        .edge_found(l_enter_edge)
+    );
+
+    assign enter_edge = l_enter_edge;
+
+
+    logic [9:0] bcd_value;
+
+    bcd_register bcd_register_keyboard(
+        .clk(clk),
+        .rst(rst),
+        .op_ctrl(op_ctrl),
+        .binary_val(binary_num),
+        .valid_scan_code(valid_scan_code),
+        .bcd_value(bcd_value)
+    );
+
+    logic [7:0] binary_full_num;
+
+    bcd2bin bcd2bin_inst(
+        .bcd(bcd_value),
+        .bin(binary_full_num)
+    );
+
+    logic valid_l;
+    logic [7:0] num_or_operand_l;
+
+    mux_keyboard mux_keyboard_inst(
+        .clk(clk),
+        .rst(rst),
+        .op_ctrl(op_ctrl),
+        .number(binary_full_num),
+        .operand(binary_num),
+        .valid(valid_l),
+        .num_or_operand(num_or_operand_l)
+    );
+
+    assign valid = valid_l;
+    assign num_or_operand = num_or_operand_l;
 
 endmodule

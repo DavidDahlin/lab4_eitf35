@@ -7,6 +7,7 @@
 module bcd_register ( 
     input logic clk,
     input logic rst,
+    
     input logic op_ctrl,
     input logic [3:0] binary_val,
     input logic valid_scan_code,
