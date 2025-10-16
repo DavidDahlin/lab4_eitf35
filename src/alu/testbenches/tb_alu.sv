@@ -26,6 +26,9 @@ module testbench_alu();
         b = 10;
         op = 133;
         #100;
+        a = 90;
+        b = 100;
+        op = 130;
     end
 
     alu alu_inst(

@@ -20,5 +20,5 @@
 # Display
 ![Display](_res/display.jpg)
 ![Display](_res/unit.jpg)
-
+![Display](_res/operations.jpg)
 
