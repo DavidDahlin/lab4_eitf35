@@ -98,7 +98,7 @@ module calulator_top(
 
     blk_mem_gen_0 memory(
         .clka(clk),
-        .ena(ena),
+        .ena(1'b1),
         .wea(wea),
         .addra(addra),
         .dina(dina),

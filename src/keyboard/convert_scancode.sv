@@ -22,8 +22,8 @@ module convert_scancode (
 
     logic parity, parity_next;
 
-    always_ff @(posedge clk or posedge rst) begin
-        if(rst == 1)begin
+    always_ff @(posedge clk or negedge rst) begin
+        if(rst == 0)begin
             serial_data_register <= '0;
             counter <= '0;
             parity <= '0;

@@ -31,8 +31,8 @@ module keyboard_ctrl (
     logic [31:0] register_of_digits_next;
 
 
-    always_ff @(posedge clk or posedge rst) begin
-        if(rst == 1)begin
+    always_ff @(posedge clk or negedge rst) begin
+        if(rst == 0)begin
             delay_counter <= '0;
             display_counter <= '0;
         end else begin
@@ -41,8 +41,8 @@ module keyboard_ctrl (
         end
     end
 
-    always_ff @(posedge clk or posedge rst) begin //For registers 
-        if(rst == 1)begin
+    always_ff @(posedge clk or negedge rst) begin //For registers 
+        if(rst == 0)begin
             latest_scan_code_in <= '0;
             register_of_digits <= '0;
         end else begin

@@ -13,8 +13,8 @@ module edge_detector (
 
     logic edge_previous, edge_found_internal;
 
-    always_ff @(posedge clk or posedge rst) begin
-        if(rst == 1) begin
+    always_ff @(posedge clk or negedge rst) begin
+        if(rst == 0) begin
             edge_previous <= 0;
             edge_found <= 0;
         end else begin
