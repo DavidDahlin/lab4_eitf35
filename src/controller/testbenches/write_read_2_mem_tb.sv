@@ -21,7 +21,7 @@ module w_n_r_2mem_tb ();
     logic [7:0] a, b, op;
 
 
-    always #10 clk = ~clk;
+    always #20 clk = ~clk;
 
     initial begin
         enter_edge = 0;
@@ -69,7 +69,7 @@ module w_n_r_2mem_tb ();
         .enter_edge(enter_edge),
         .valid_signal(valid_signal),
         .value(value),
-        .douta(data),
+        .douta(douta),
         .ena(ena),
         .wea(wea),
         .addra(addra),

@@ -116,11 +116,36 @@ end
 
 always_comb begin
     internal_output_reg_next = internal_output_reg;
-    if (reader == 1) begin
-        if(modulo_flag == 1) internal_output_reg_next = {internal_output_reg[15:0], 8'h00};
+    if (reader_dd == 1) begin
+        if(mod_flag_dd == 1) internal_output_reg_next = {internal_output_reg[15:0], 8'h00};
+        // else internal_output_reg_next = {internal_output_reg[15:0], douta};
         else internal_output_reg_next = {internal_output_reg[15:0], douta};
+
     end 
+end /// ÄR READER HÖG FÖR KORT TID
+
+logic reader_d, reader_d_n, reader_dd, reader_dd_n, mod_flag_d, mod_flag_d_n, mod_flag_dd, mod_flag_dd_n;
+
+always_ff @(posedge clk or negedge rst) begin
+    if (rst==0) begin
+        reader_d <= 0;
+        reader_dd <= 0;
+        mod_flag_d <= 0;
+        mod_flag_dd <= 0;
+    end else begin
+        reader_d <= reader_d_n;
+        reader_dd <= reader_dd_n;
+        mod_flag_d <= mod_flag_d_n;
+        mod_flag_dd <= mod_flag_dd_n;
+    end
 end
+always_comb begin
+    reader_d_n = reader;
+    reader_dd_n = reader_d;
+    mod_flag_d_n = modulo_flag;
+    mod_flag_dd_n = mod_flag_d;
+end
+
 
 always_comb begin
     internal_dina_next = internal_dina;
@@ -133,7 +158,10 @@ assign addra = addr_counter;
 assign ena = reader | writer;
 assign dina = internal_dina;
 
-assign {a, op, b} = internal_output_reg;
+// assign {a, op, b} = internal_output_reg;
+assign b = internal_output_reg[23:16];
+assign op = internal_output_reg[15:8];
+assign a = internal_output_reg[7:0];
 
     
 endmodule
