@@ -41,7 +41,7 @@ logic [23:0] internal_output_reg;
 logic [23:0] internal_output_reg_next;
 
 logic modulo_flag;
-assign modulo_flag = (pop_counter == 2'd2 && douta == 2'd133) ? 1 : 0; // For modulo
+assign modulo_flag = (pop_counter == 2'd2 && douta == 8'd133) ? 1 : 0; // For modulo
 
 
 

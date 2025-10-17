@@ -4,7 +4,7 @@
 
 `timescale 1ns/1ps
 
-module binary_to_sg (
+module binary_to_sg_kb (
     input logic [3:0] binary_in,
     output logic [7:0] sev_seg
     );

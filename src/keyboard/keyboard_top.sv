@@ -86,7 +86,7 @@ module keyboard_top (
         );
 
 
-    binary_to_sg binary_to_sg_inst (
+    binary_to_sg_kb binary_to_sg_inst (
         .binary_in(binary_num),
         .sev_seg(num)
         );
