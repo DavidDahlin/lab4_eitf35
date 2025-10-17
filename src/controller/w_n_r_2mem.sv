@@ -77,7 +77,7 @@ always_comb begin
     addr_counter_next = addr_counter;
 
     if(writer == 1) addr_counter_next = addr_counter + 1;
-    else if(reader == 1) addr_counter_next = addr_counter - 1;
+    else if(enter_or_valid == 2'b10 || pop_counter == 2'd1 || pop_counter == 2'd2 ) addr_counter_next = addr_counter - 1;
 end
 
 
