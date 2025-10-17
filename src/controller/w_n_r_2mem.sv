@@ -9,7 +9,7 @@ module w_n_r_2mem(
     input logic valid_signal,
     input logic [7:0] value,
 
-    input [7:0] douta,
+    input logic [7:0] douta,
 
     output logic wea,
     output logic ena,

@@ -22,6 +22,24 @@ module calulator_top(
     output logic io_vertical_sync
     );
 
+    // DATA LATCHING DEBOUNCE
+    logic latch_debounced, latch_edge;
+
+    debouncer debounce (
+        .clk(clk),
+        .rst(rst),
+        .button_in(latch),
+        .button_out(latch_debounced)
+    );
+
+    edge_detector_pos edge_detector (
+        .clk(clk),
+        .rst(rst),
+        .signal(latch_debounced),
+        .edge_found(latch_edge)
+    );
+
+
     logic [7:0] op, a, b, result;
     logic sign, overflow;
 
@@ -104,24 +122,6 @@ module calulator_top(
         .dina(dina),
         .douta(douta)
     );
-
-    // DATA LATCHING DEBOUNCE
-    logic latch_debounced, latch_edge;
-
-    debouncer debounce (
-        .clk(clk),
-        .rst(rst),
-        .button_in(latch),
-        .button_out(latch_debounced)
-    );
-
-    edge_detector_pos edge_detector (
-        .clk(clk),
-        .rst(rst),
-        .signal(latch_debounced),
-        .edge_found(latch_edge)
-    );
-
 
 
 

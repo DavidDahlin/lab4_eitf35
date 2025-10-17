@@ -186,7 +186,7 @@ module display_top(
     logic [7:0] res_sign;
     
     // convert sign to +/-
-    assign res_sign = sign == 0 ? 8'd131 : 8'h130;
+    assign res_sign = sign == 0 ? 8'd131 : 8'd130;
 
     op_drawer #(
         .X_OFFSET(430)

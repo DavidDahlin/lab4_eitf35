@@ -28,7 +28,7 @@ module convert_to_binary (
             8'h4A:  binary_out = 4'ha; //"-" 
             8'h4E:  binary_out = 4'hb; //"+" 
             8'h5D:  binary_out = 4'hc; //"*" 
-            8'h2E:  binary_out = 4'hd; //"%" 
+            8'h3A:  binary_out = 4'hd; //"%" 
 
             8'h66:  binary_out = 4'he; //"backspace"
 
