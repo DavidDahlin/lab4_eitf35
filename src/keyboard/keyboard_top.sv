@@ -93,7 +93,7 @@ module keyboard_top (
 
     logic l_enter_edge;
 
-    edge_detector enter_edge_detector(
+    edge_detector_pos enter_edge_detector(
         .clk(clk),
         .rst(rst),
         .signal(enter),
