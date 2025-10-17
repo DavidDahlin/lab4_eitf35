@@ -97,7 +97,7 @@ assign writer_next = (enter_or_valid == 2'b01) ? 1'b1 : 1'b0;
 always_comb begin
     reader_next = reader;
     if (pop_counter == 2'd3 || modulo_flag == 1) reader_next = 0;
-    else if(enter_or_valid == 2'b01) reader_next = 1;
+    else if(enter_or_valid == 2'b10) reader_next = 1;
 end
 
 
@@ -128,7 +128,7 @@ always_comb begin
 end
 
 
-assign wea = reader;
+assign wea = writer;
 assign addra = addr_counter;
 assign ena = reader | writer;
 assign dina = internal_dina;

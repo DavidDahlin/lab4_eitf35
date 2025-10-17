@@ -3,25 +3,65 @@
 
 module w_n_r_2mem_tb ();
 
-    logic clk;
+    logic clk = 0;
     logic rst;
 
-    input logic enter_edge,
-    input logic valid_signal,
-    input logic [7:0] value,
+    logic enter_edge;
+    logic valid_signal;
+    logic [7:0] value;
 
-    input [7:0] douta,
+    logic [7:0] douta;
 
-    output logic wea,
-    output logic ena,
-    output logic [12:0] addra,
-    output logic [7:0] dina, 
+    logic wea;
+    logic ena;
+    logic [12:0] addra;
+    logic [7:0] dina; 
     
 
-    output logic [7:0] a, b, op
+    logic [7:0] a, b, op;
 
 
+    always #10 clk = ~clk;
 
+    initial begin
+        enter_edge = 0;
+        valid_signal = 0;
+        value = 0;  
+        rst = 0;
+        @(posedge clk);
+        @(posedge clk);
+        rst = 1;
+        @(posedge clk);
+
+        value = 8'd1;
+        valid_signal = 1'b1;
+        @(posedge clk);
+        valid_signal = 1'b0;
+        @(posedge clk);
+        value = 8'd131;
+        valid_signal = 1'b1;
+        @(posedge clk);
+        valid_signal = 1'b0;
+        @(posedge clk);
+        value = 8'd2;
+        valid_signal = 1'b1;
+        @(posedge clk);
+        valid_signal = 1'b0;
+        @(posedge clk);
+        @(posedge clk);
+        @(posedge clk);
+        @(posedge clk);
+        @(posedge clk);
+        @(posedge clk);
+        @(posedge clk);
+
+        enter_edge = 1'b1;
+        @(posedge clk);
+        enter_edge = 1'b0;
+        @(posedge clk);
+
+
+    end
 
     w_n_r_2mem dut (
         .clk(clk),
@@ -31,12 +71,22 @@ module w_n_r_2mem_tb ();
         .value(value),
         .douta(data),
         .ena(ena),
-        .wna(wea),
+        .wea(wea),
         .addra(addra),
-        .dina(dina)
+        .dina(dina),
         .a(a),
         .b(b),
         .op(op)
+    );
+
+
+    blk_mem_gen_0 memory(
+        .clka(clk),
+        .ena(1'b1),
+        .wea(wea),
+        .addra(addra),
+        .dina(dina),
+        .douta(douta)
     );
 
 
