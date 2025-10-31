@@ -20,6 +20,18 @@ logic [15:0] shift_reg;
 logic [15:0] shift_reg_next;
 
 
+logic op; //For timing
+logic op_next; 
+
+assign op_next = op_ctrl;
+always_ff @(posedge clk or negedge rst) begin
+    if(rst == 0) op <= '0;
+    else op <= op_next;
+end
+
+
+
+
 always_ff @(posedge clk or negedge rst) begin
     if(rst == 0) begin
         shift_reg <= '0;
@@ -30,7 +42,7 @@ end
 
 always_comb begin
     shift_reg_next = shift_reg;
-    if (op_ctrl) shift_reg_next = '0;
+    if (op) shift_reg_next = '0;
     else if (valid_scan_code) begin
         shift_reg_next = (binary_val == 4'he) ? shift_reg >> 4 : {shift_reg[11:0], binary_val};
     end
