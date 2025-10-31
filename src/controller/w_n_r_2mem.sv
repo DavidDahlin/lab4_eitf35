@@ -116,8 +116,8 @@ end
 
 always_comb begin
     internal_output_reg_next = internal_output_reg;
-    if (reader_dd == 1) begin
-        if(mod_flag_dd == 1) internal_output_reg_next = {internal_output_reg[15:0], 8'h00};
+    if (reader_ddd == 1) begin
+        if(mod_flag_ddd == 1) internal_output_reg_next = {internal_output_reg[15:0], 8'h00};
         // else internal_output_reg_next = {internal_output_reg[15:0], douta};
         else internal_output_reg_next = {internal_output_reg[15:0], douta};
 
@@ -125,25 +125,32 @@ always_comb begin
 end /// ÄR READER HÖG FÖR KORT TID
 
 logic reader_d, reader_d_n, reader_dd, reader_dd_n, mod_flag_d, mod_flag_d_n, mod_flag_dd, mod_flag_dd_n;
+logic reader_ddd, reader_ddd_n, mod_flag_ddd, mod_flag_ddd_n;
 
 always_ff @(posedge clk or negedge rst) begin
     if (rst==0) begin
         reader_d <= 0;
         reader_dd <= 0;
+        reader_ddd <= 0;
         mod_flag_d <= 0;
         mod_flag_dd <= 0;
+        mod_flag_ddd <= 0;
     end else begin
         reader_d <= reader_d_n;
         reader_dd <= reader_dd_n;
+        reader_ddd <= reader_ddd_n;
         mod_flag_d <= mod_flag_d_n;
         mod_flag_dd <= mod_flag_dd_n;
+        mod_flag_ddd <= mod_flag_ddd_n;
     end
 end
 always_comb begin
     reader_d_n = reader;
     reader_dd_n = reader_d;
+    reader_ddd_n = reader_dd;
     mod_flag_d_n = modulo_flag;
     mod_flag_dd_n = mod_flag_d;
+    mod_flag_ddd_n = mod_flag_dd;
 end
 
 
@@ -158,10 +165,52 @@ assign addra = addr_counter;
 assign ena = reader | writer;
 assign dina = internal_dina;
 
-// assign {a, op, b} = internal_output_reg;
-assign b = internal_output_reg[23:16];
-assign op = internal_output_reg[15:8];
-assign a = internal_output_reg[7:0];
+// assign a = internal_output_reg[7:0];
+// assign b = internal_output_reg[23:16];
+// assign op = internal_output_reg[15:8];
 
+
+
+
+logic [7:0] a_internal, a_internal_next, b_internal, b_internal_next, op_internal, op_internal_next;
+logic [3:0] c, c_next;
+
+always_ff @(posedge clk or negedge rst) begin
+    if (rst == 0) begin
+        c <= '0;
+        a_internal <= '0;
+        b_internal <= '0;
+        op_internal <= '0;
+    end else begin
+        c <= c_next;
+        a_internal <= a_internal_next;
+        b_internal <= b_internal_next;
+        op_internal <= op_internal_next;
+    end
+end
+
+always_comb begin
+    c_next = c;
+    if(enter_edge == 1) begin
+        c_next = 3'd1;
+    end else if (c != 3'd0) begin
+        c_next = c + 1;
+    end
+end
+
+always_comb begin
+    a_internal_next = a_internal;
+    b_internal_next = b_internal;
+    op_internal_next = op_internal;
+    if(c == 3'd6) begin
+        a_internal_next = internal_output_reg[7:0];
+        b_internal_next = internal_output_reg[23:16];
+        op_internal_next = internal_output_reg[15:8];
+    end
+end
+
+assign a = a_internal;
+assign b = b_internal;
+assign op = op_internal;
     
 endmodule

@@ -5,8 +5,10 @@ module calulator_top(
     input logic rst,
 
     // DEBUG
-    output logic enter_led,
-    output logic BTNC_led,
+    output [7:0] a_d,
+    // output [7:0] b_d,
+    output logic v_out,
+
 
     // Data Latching (BTNC)
     input logic latch,
@@ -16,7 +18,7 @@ module calulator_top(
     input logic kb_clk,
 
     // Keyboard Debug
-    output logic [7:0] sc,
+    // output logic [7:0] sc,
     output logic [7:0] num,
     output logic [3:0] seg_en,
 
@@ -28,7 +30,7 @@ module calulator_top(
 
     // DATA LATCHING DEBOUNCE
     logic latch_debounced, latch_edge;
-
+    logic [7:0] sc;
     debouncer debounce (
         .clk(clk),
         .rst(rst),
@@ -127,26 +129,25 @@ module calulator_top(
         .douta(douta)
     );
 
-    logic [15:0] c, c_n;
-    logic e_l, e_ln;
-
-    always_ff @(posedge clk) begin
-        c <= c_n;
-        e_l <= e_ln;
-    end
-
-    always_comb begin
-        e_ln = e_l;
-        c_n = c + 16'd1;
-        if (enter_edge == 1 && e_l == 0) begin
-            e_ln = 1'b1;
-            c_n = 16'd0;
-        end else if (c == 16'hFFFF) begin
-            e_ln = 1'b0;
-        end
-    end
-
-    assign enter_led = e_l;
-    assign BTNC_led = latch;
+    // edge_holder #(
+    //     .W(7)
+    // ) edge_holder_8 (
+    //     .clk(clk),
+    //     .rst(rst),
+    //     .edge_in(num_or_operand),
+    //     .hold(a_d)
+    // );
+    assign a_d = num_or_operand;
+    edge_holder #(
+        .W(0)
+    ) edge_holder_1 (
+        .clk(clk),
+        .rst(rst),
+        .edge_in(valid),
+        .hold(v_out)
+    );
+    
+    // assign a_d = a;
+    // assign b_d = b;
 
 endmodule

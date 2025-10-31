@@ -43,7 +43,7 @@ end
 always_comb begin
     shift_reg_next = shift_reg;
     if (op) shift_reg_next = '0;
-    else if (valid_scan_code) begin
+    else if (valid_scan_code && (binary_val == 4'he || binary_val < 4'd10)) begin
         shift_reg_next = (binary_val == 4'he) ? shift_reg >> 4 : {shift_reg[11:0], binary_val};
     end
 end

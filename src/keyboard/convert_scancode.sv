@@ -61,6 +61,7 @@ module convert_scancode (
 
     assign scan_code_out = serial_data_register[7:0];
 
-    assign valid_scan_code = (counter == 11) & ~parity;
+    // assign valid_scan_code = (counter == 11) & ~parity;
+    assign valid_scan_code = (counter == 11);
     
 endmodule

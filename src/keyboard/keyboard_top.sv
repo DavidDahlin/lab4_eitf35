@@ -77,13 +77,21 @@ module keyboard_top (
         // debug
         assign sc = l_sc;
 
-    logic enter;
+    logic enter, enter_u;
         
-    convert_to_binary convert_to_binary_inst (
+    convert_to_binary convert_to_binary_inst_1 (
         .scan_code_in(code_to_display),
         .binary_out(binary_num),
-        .enter_signal(enter)
+        .enter_signal(enter_u)
         );
+
+    logic [3:0] binary_num_to_display;
+
+    convert_to_binary convert_to_binary_inst_2 (
+        .scan_code_in(scan_code),
+        .binary_out(binary_num_to_display),
+        .enter_signal(enter)
+    );
 
 
     binary_to_sg_kb binary_to_sg_inst (
@@ -109,7 +117,7 @@ module keyboard_top (
         .clk(clk),
         .rst(rst),
         .op_ctrl(op_ctrl),
-        .binary_val(binary_num),
+        .binary_val(binary_num_to_display),
         .valid_scan_code(valid_scan_code),
         .bcd_value(bcd_value)
     );
@@ -129,7 +137,7 @@ module keyboard_top (
         .rst(rst),
         .op_ctrl(op_ctrl),
         .number(binary_full_num),
-        .operand(binary_num),
+        .operand(binary_num_to_display),
         .valid(valid_l),
         .num_or_operand(num_or_operand_l)
     );
