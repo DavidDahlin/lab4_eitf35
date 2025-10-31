@@ -26,19 +26,6 @@ logic [7:0] out_reg_next;
 logic val_reg; 
 logic val_reg_next; 
 
-logic op; //For timing
-logic op_next; 
-
-assign op_next = op_ctrl;
-always_ff @(posedge clk or negedge rst) begin
-    if(rst == 0) op <= '0;
-    else op <= op_next;
-end
-
-
-
-
-
 
 always_ff @(posedge clk or negedge rst) begin
     if(rst == 0) begin
@@ -56,7 +43,7 @@ end
 //counter
 always_comb begin
     counter_next = counter;
-    if(op)begin 
+    if(op_ctrl)begin 
         if(operand == 4'hd) counter_next = 2'd0;
         else counter_next = (counter == 2'd2) ? 2'd0 : counter + 1; 
     end
@@ -75,7 +62,7 @@ always_comb begin
     endcase
 end
 
-assign val_reg_next = (op) ? 1 : 0;
+assign val_reg_next = (op_ctrl) ? 1 : 0;
 
 assign valid = val_reg;
 assign num_or_operand = out_reg;
