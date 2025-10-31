@@ -148,6 +148,6 @@ module calulator_top(
     end
 
     assign enter_led = e_l;
-    assign BTNC_led = 
+    assign BTNC_led = latch;
 
 endmodule
