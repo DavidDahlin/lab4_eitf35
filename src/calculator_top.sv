@@ -127,7 +127,7 @@ module calulator_top(
         .douta(douta)
     );
 
-    logic [16:0] c, c_n;
+    logic [15:0] c, c_n;
     logic e_l, e_ln;
 
     always_ff @(posedge clk) begin
@@ -141,8 +141,7 @@ module calulator_top(
         if (enter_edge == 1 && e_l == 0) begin
             e_ln = 1'b1;
             c_n = 16'd0;
-        end 
-        if (16'hFFFF == 1) begin
+        end else if (c == 16'hFFFF) begin
             e_ln = 1'b0;
         end
     end
