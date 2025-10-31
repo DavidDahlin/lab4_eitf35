@@ -4,6 +4,10 @@ module calulator_top(
     input logic clk,
     input logic rst,
 
+    // DEBUG
+    output logic enter_led,
+    output logic BTNC_led,
+
     // Data Latching (BTNC)
     input logic latch,
 
@@ -123,6 +127,27 @@ module calulator_top(
         .douta(douta)
     );
 
+    logic [16:0] c, c_n;
+    logic e_l, e_ln;
 
+    always_ff @(posedge clk) begin
+        c <= c_n;
+        e_l <= e_ln;
+    end
+
+    always_comb begin
+        e_ln = e_l;
+        c_n = c + 16'd1;
+        if (enter_edge == 1 && e_l == 0) begin
+            e_ln = 1'b1;
+            c_n = 16'd0;
+        end 
+        if (16'hFFFF == 1) begin
+            e_ln = 1'b0;
+        end
+    end
+
+    assign enter_led = e_l;
+    assign BTNC_led = 
 
 endmodule
